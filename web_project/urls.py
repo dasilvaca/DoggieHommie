@@ -6,6 +6,7 @@ from doggieHommie.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
+    path('/', PostCreateView.as_view()),
     path('admin/', admin.site.urls),
     path('users',  UserCreateListView.as_view()),
     path('user/<int:pk>', UserRUDView.as_view()),
