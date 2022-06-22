@@ -15,7 +15,7 @@ from pathlib import Path
 from datetime import timedelta
 import django_heroku
 
-django_heroku.settings(locals())
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'fb(m5z7y8$bmrnii$gp1d@#bv+-xk7s27enz+%%wxgfkm*i0$j'
+SECRET_KEY = 'fb(m5z7y8$bmrnii$gp1d@#bv+-xk7s27enz+%%wxgfkm*i0$j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -154,8 +154,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
