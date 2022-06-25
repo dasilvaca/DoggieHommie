@@ -18,6 +18,13 @@ from django.urls import path
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+
+from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -32,12 +39,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'fb(m5z7y8$bmrnii$gp1d@#bv+-xk7s27enz+%%wxgfkm*i0$j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 CORS_ALLOW_ALL_ORIGINS = True
 
-
+STATIC_URL = './static/'
+STATIC_ROOT = "./static/"
+STATICFILES_DIRS = ["./static/"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'doggieHommie',
+    "gunicorn",
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -106,8 +117,8 @@ TEMPLATES = [
     },
 ]
 
+# WSGI_APPLICATION = 'web_project.wsgi.application'
 WSGI_APPLICATION = 'web_project.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -166,11 +177,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-# STATIC_URL = './static/'
-# STATIC_ROOT = "./static/"
-# STATICFILES_DIRS = ["./static/"]
 
-# urlpatterns = [
-# 	 path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
-# ]
+
+urlpatterns = [
+	 path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
+]
+application = Cling(get_wsgi_application())
 django_heroku.settings(locals())
