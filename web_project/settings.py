@@ -15,7 +15,6 @@ from pathlib import Path
 from datetime import timedelta
 import django_heroku
 from django.urls import path
-# from . import views
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
@@ -167,11 +166,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-STATIC_URL = './static/'
-STATIC_ROOT = "./static/"
-STATICFILES_DIRS = ["./static/"]
+# STATIC_URL = './static/'
+# STATIC_ROOT = "./static/"
+# STATICFILES_DIRS = ["./static/"]
 
-urlpatterns = [
-	 path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
-]
+# urlpatterns = [
+# 	 path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
+# ]
 django_heroku.settings(locals())
