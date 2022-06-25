@@ -14,11 +14,16 @@ import os
 from pathlib import Path
 from datetime import timedelta
 import django_heroku
+from django.urls import path
+# from . import views
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +33,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'fb(m5z7y8$bmrnii$gp1d@#bv+-xk7s27enz+%%wxgfkm*i0$j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
@@ -156,9 +161,17 @@ USE_TZ = True
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
+STATIC_URL = './static/'
+STATIC_ROOT = "./static/"
+STATICFILES_DIRS = ["./static/"]
+
+urlpatterns = [
+	 path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
+]
 django_heroku.settings(locals())
