@@ -17,6 +17,7 @@ class User(models.Model):
     ciudad = models.CharField(max_length = 40)
     estado = models.CharField(max_length = 40)
     number_banned = models.IntegerField( null = True)
+    profile_picture = models.TextField(blank = True, null = True)
 
     
     def __str__(self):

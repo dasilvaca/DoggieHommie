@@ -15,6 +15,7 @@ class UserRUDView(generics.RetrieveUpdateDestroyAPIView):
     def patch(self, request, pk):
         data = request.data
         user = User.objects.get(id = pk)
+        
         if user != None:
             appUser = DjangoUser.objects.get(id = user.user_id)
             data["number_banned"] = int(str(user.number_banned)) + 1

@@ -1,9 +1,11 @@
 
 from django.contrib import admin
 from django.urls import path
+from doggieHommie.views.ChangeProfilePicture import ChangeProfilePictureView
 from doggieHommie.views.UserDetail import UserDetailAPIView
 from doggieHommie.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +26,7 @@ urlpatterns = [
     path('user/report/<int:pk>', UserRUDView.as_view()),
     path('post/deshabilitar/<int:pk>', PostUpdateView.as_view()),
     path('notification/getAll/<int:user>',  NotificationListView.as_view()),
+    path('changePicture/<int:pk>', ChangeProfilePictureView.as_view())
+    
     # path('upvotePost', UserRUDView.as_view()),
 ]
