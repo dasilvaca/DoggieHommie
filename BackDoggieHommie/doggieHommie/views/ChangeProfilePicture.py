@@ -21,12 +21,14 @@ class ChangeProfilePictureView(generics.RetrieveUpdateDestroyAPIView):
 
     def patch(self, request, pk):
         data = request.data
+        print(data)
         user = User.objects.get(id=pk)
 
         if user != None:
             image = data["data"]
 
             try:
+                appUser = DjangoUser.objects.get(id = user.user_id)
 
                 extesion = data["imgName"].split(".")[-1]
                 file = base64.b64decode(image)
@@ -35,6 +37,9 @@ class ChangeProfilePictureView(generics.RetrieveUpdateDestroyAPIView):
                 fileInfo = storage.child(path).put(file)
                 data["profile_picture"] = storage.child(
                     path).get_url(fileInfo["downloadTokens"])
+
+                appUser.profile_picture = data["profile_picture"]
+                appUser.save()
                 
                 response = super().patch(request)
 
