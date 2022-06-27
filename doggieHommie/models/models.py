@@ -1,8 +1,8 @@
-# from cgitb import text
-# from datetime import date
-# from distutils import extension
-# from pyexpat import model
-# from turtle import title
+from cgitb import text
+from datetime import date
+from distutils import extension
+from pyexpat import model
+from turtle import title
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -17,6 +17,7 @@ class User(models.Model):
     ciudad = models.CharField(max_length = 40)
     estado = models.CharField(max_length = 40)
     number_banned = models.IntegerField( null = True)
+    profile_picture = models.TextField(blank = True, null = True)
 
     
     def __str__(self):
