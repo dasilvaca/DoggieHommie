@@ -13,6 +13,7 @@ class LoginSerializer (TokenObtainPairSerializer):
         data["email"] = self.user.username
         data["active"] = self.user.is_active
         data["lastLogin"] = self.user.last_login
+        data["profile_picture"] = self.profile_picture
         update_last_login(None, self.user)
         return data
         
